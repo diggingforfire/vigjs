@@ -1,0 +1,21 @@
+{
+	"name": "vigjs",
+	"version": "1.0.0",
+	"description": "Simple Vigenère cipher encryption and decryption (no uppercase support yet)",
+	"main": "vig.js",
+	"scripts": {
+		"test": "jest"
+	},
+	"keywords": [
+		"viginere",
+		"cipher",
+		"encryption",
+		"crypto"
+	],
+	"author": "Robbie Luijben",
+	"license": "MIT",
+	"devDependencies": {
+		"eslint": "^7.28.0",
+		"jest": "^27.0.4"
+	}
+}
