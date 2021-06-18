@@ -3,12 +3,17 @@
 const startUnicode = "a".charCodeAt();
 const alphabetLength = 26;
 
-const shiftMode = Object.freeze({
+const shiftModeType = Object.freeze({
     FORWARD: "forward",
     BACKWARD: "backward",
 });
 
-function substitute(text, key, mode = shiftMode.FORWARD) {
+let shiftMode = {
+    forward: 1,
+    backward: -1,
+};
+
+function substitute(text, key, modeType = shiftModeType.FORWARD) {
     return [...text]
         .map((textChar, index) => {
             // corresponding character from the key
@@ -22,8 +27,7 @@ function substitute(text, key, mode = shiftMode.FORWARD) {
             // I reject your text and substitute my own
             const substitutedCharAlphabetIndex = mod(
                 plainTextCharAlphabetIndex +
-                    keyCharAlphabetIndex *
-                        (mode === shiftMode.FORWARD ? 1 : -1),
+                    keyCharAlphabetIndex * shiftMode[modeType],
                 alphabetLength
             );
 
@@ -48,7 +52,7 @@ function mod(p, q) {
  * @returns
  */
 function encrypt(plainText, key) {
-    return substitute(plainText, key, shiftMode.FORWARD);
+    return substitute(plainText, key, shiftModeType.FORWARD);
 }
 
 /**
@@ -58,7 +62,7 @@ function encrypt(plainText, key) {
  * @returns
  */
 function decrypt(cipherText, key) {
-    return substitute(cipherText, key, shiftMode.BACKWARD);
+    return substitute(cipherText, key, shiftModeType.BACKWARD);
 }
 
 module.exports = {
